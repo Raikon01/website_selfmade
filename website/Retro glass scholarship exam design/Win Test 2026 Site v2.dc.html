@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;500;600&amp;family=Karla:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #FBF5EE; font-family: "Karla", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #B85A22; text-decoration: none; }
+  a:hover { color: #16233F; }
+  input, select, textarea, button { font-family: "Karla", system-ui, sans-serif; }
+  @keyframes wt-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+</style>
+</helmet>
+
+<div style="position:relative; min-height:100vh; background:#FBF5EE; color:#16233F; overflow-x:clip;">
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div style="background:#16233F; color:#FBE3D2;">
+    <div style="max-width:1280px; margin:0 auto; padding:11px 28px; display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; text-align:center;">
+      <span style="font-size:13.5px; letter-spacing:0.01em;">Registration open for Win Test 2026 — LKG to Class XII. Registration closes 10 November 2026.</span>
+      <button type="button" onClick="{{ goRegister }}" style="padding:0; border:0; background:transparent; color:#F0A86E; font-size:13.5px; font-weight:700; letter-spacing:0.02em; border-bottom:1px solid rgba(240,168,110,0.5); cursor:pointer;" style-hover="color:#FFFFFF; border-color:#FFFFFF;">Register through your school →</button>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <div style="border-bottom:1px solid rgba(22,35,63,0.14); background:#FBF5EE;">
+    <div style="max-width:1280px; margin:0 auto; padding:20px 28px; display:flex; align-items:center; justify-content:space-between; gap:28px; flex-wrap:wrap;">
+      <div onClick="{{ goHome }}" style="display:flex; align-items:center; gap:14px; cursor:pointer;">
+        <svg width="40" height="40" viewBox="0 0 32 32" fill="none">
+          <path d="M16 3.6c2 1.9 2.8 3.4 2.8 4.8 0 1.6-1.3 2.7-2.8 2.7s-2.8-1.1-2.8-2.7c0-1.4.8-2.9 2.8-4.8z" fill="#E9834A"></path>
+          <rect x="14.7" y="12" width="2.6" height="7.6" rx="1.1" fill="#5C4BC4"></rect>
+          <path d="M3.5 21.4c3.8-1.6 7.6-1.6 11.4 0v6.6c-3.8-1.6-7.6-1.6-11.4 0v-6.6z" fill="#16233F"></path>
+          <path d="M28.5 21.4c-3.8-1.6-7.6-1.6-11.4 0v6.6c3.8-1.6 7.6-1.6 11.4 0v-6.6z" fill="#16233F" opacity="0.62"></path>
+        </svg>
+        <div style="display:flex; flex-direction:column; line-height:1.1;">
+          <span style="font-family:'Spectral',serif; font-weight:500; font-size:22px; letter-spacing:0.01em;">Win Test 2026</span>
+          <span style="font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:#6E7B9B; margin-top:4px;">National Scholarship Assessment</span>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:4px; flex-wrap:wrap;">
+        <button type="button" onClick="{{ goHome }}" style="padding:9px 14px; border:0; background:transparent; color:#16233F; font-size:14px; font-weight:500; cursor:pointer;" style-hover="color:#B85A22;">Home</button>
+        <button type="button" onClick="{{ goAbout }}" style="padding:9px 14px; border:0; background:transparent; color:#16233F; font-size:14px; font-weight:500; cursor:pointer;" style-hover="color:#B85A22;">About Us</button>
+        <button type="button" onClick="{{ goSyllabus }}" style="padding:9px 14px; border:0; background:transparent; color:#16233F; font-size:14px; font-weight:500; cursor:pointer;" style-hover="color:#B85A22;">Academics</button>
+        <button type="button" onClick="{{ goReport }}" style="padding:9px 14px; border:0; background:transparent; color:#16233F; font-size:14px; font-weight:500; cursor:pointer;" style-hover="color:#B85A22;">Performance Report</button>
+        <button type="button" onClick="{{ goResults }}" style="padding:9px 14px; border:0; background:transparent; color:#16233F; font-size:14px; font-weight:500; cursor:pointer;" style-hover="color:#B85A22;">Results</button>
+        <button type="button" onClick="{{ goRegister }}" style="margin-left:8px; flex:none; white-space:nowrap; line-height:1.2; padding:12px 22px; border:1px solid #16233F; border-radius:2px; background:#16233F; color:#FBF5EE; font-size:13.5px; font-weight:600; letter-spacing:0.03em; cursor:pointer;" style-hover="background:#E9834A; border-color:#E9834A; color:#16233F;">Apply Online</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HOME ============ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <div>
+    <!-- HERO -->
+    <div style="position:relative;">
+      <div style="position:relative; min-height:min(78vh,620px); display:flex; align-items:flex-end;">
+        <img src="./assets/main.jpg" alt="Students of Win Test 2026 and the careers their strengths lead to" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:60% 28%;">
+        <div style="position:absolute; inset:0; background:linear-gradient(100deg, rgba(22,35,63,0.6) 0%, rgba(22,35,63,0.42) 42%, rgba(22,35,63,0.16) 68%, rgba(22,35,63,0.3) 100%);"></div>
+        <div style="position:relative; width:100%; max-width:1280px; margin:0 auto; padding:0 28px 58px;">
+          <div style="max-width:min(560px,62%); padding:clamp(24px,2.6vw,38px); background:linear-gradient(160deg, rgba(22,35,63,0.72), rgba(22,35,63,0.64)); border:1px solid rgba(255,255,255,0.3); backdrop-filter:blur(15px) saturate(1.1); -webkit-backdrop-filter:blur(15px) saturate(1.1);">
+            <div style="font-size:11px; letter-spacing:0.24em; text-transform:uppercase; color:#FFFFFF;">A National Academic Assessment &amp; Scholarship Programme</div>
+            <h1 style="font-family:'Spectral',serif; font-weight:300; font-size:clamp(36px,5vw,64px); line-height:1.08; letter-spacing:-0.005em; color:#FFFFFF; margin:20px 0 0; text-wrap:pretty;">
+              Know Your Strength.<br>Shape Your Future.
+            </h1>
+            <p style="font-size:17px; line-height:1.65; color:#FFFFFF; margin:20px 0 0; max-width:520px; text-wrap:pretty;">
+              An assessment designed not to rank children against one another, but to show each of them — and their
+              parents — where their true ability lies.
+            </p>
+            <div style="display:flex; gap:14px; margin-top:30px; flex-wrap:wrap;">
+              <button type="button" onClick="{{ goRegister }}" style="padding:15px 28px; border:1px solid #E9834A; border-radius:2px; background:#E9834A; color:#16233F; font-size:14.5px; font-weight:700; letter-spacing:0.03em; white-space:nowrap; line-height:1.2; cursor:pointer;" style-hover="background:#FBE3D2; border-color:#FBE3D2;">Register — {{ feeLabel }}</button>
+              <button type="button" onClick="{{ goReport }}" style="padding:15px 28px; border:1px solid rgba(255,255,255,0.6); border-radius:2px; background:rgba(251,245,238,0.12); color:#FFFFFF; font-size:14.5px; font-weight:600; letter-spacing:0.03em; white-space:nowrap; line-height:1.2; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); cursor:pointer;" style-hover="background:rgba(251,245,238,0.26);">View a Sample Report</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KEY FACTS -->
+      <div style="border-bottom:1px solid rgba(22,35,63,0.14); background:#F5EAE0;">
+        <div style="max-width:1280px; margin:0 auto; padding:0 28px; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+          <div style="padding:26px 28px 26px 0; border-right:1px solid rgba(22,35,63,0.12);">
+            <div style="font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:#6E7B9B;">Date of Examination</div>
+            <div style="font-family:'Spectral',serif; font-weight:500; font-size:24px; margin-top:8px;">5 December 2026</div>
+          </div>
+          <div style="padding:26px 28px; border-right:1px solid rgba(22,35,63,0.12);">
+            <div style="font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:#6E7B9B;">Time</div>
+            <div style="font-family:'Spectral',serif; font-weight:500; font-size:24px; margin-top:8px;">10 a.m. – 12 noon</div>
+          </div>
+          <div style="padding:26px 28px; border-right:1px solid rgba(22,35,63,0.12);">
+            <div style="font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:#6E7B9B;">Venue</div>
+            <div style="font-family:'Spectral',serif; font-weight:500; font-size:24px; margin-top:8px;">Respective schools</div>
+          </div>
+          <div style="padding:26px 0 26px 28px;">
+            <div style="font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:#6E7B9B;">Eligibility</div>
+            <div style="font-family:'Spectral',serif; font-weight:500; font-size:24px; margin-top:8px;">LKG to Class XII</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUIDING BELIEF -->
+    <div style="max-width:1280px; margin:0 auto; padding:96px 28px 0;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:64px; align-items:start;">
+        <div style="min-width:0;">
+          <div style="font-size:11px; letter-spacing:0.24em; text-transform:uppercase; color:#B85A22;">Our Guiding Belief</div>
+          <h2 style="font-family:'Spectral',serif; font-weight:300; font-size:clamp(30px,3.6vw,46px); line-height:1.16; letter-spacing:-0.005em; margin:20px 0 0; text-wrap:pretty;">A child's future should be built around their abilities, not our expectations</h2>
+          <div style="width:56px; height:2px; background:#E9834A; margin:28px 0 0;"></div>
+        </div>
+        <div style="min-width:0;">
+          <p style="font-family:'Spectral',serif; font-weight:400; font-size:20px; line-height:1.68; color:#2B3A5E; margin:0; text-wrap:pretty;">Parents naturally aspire to a bright future for their children. Yet a course or a career is often chosen from our own expectations, or from prevailing social trends, long before anyone has understood the child's aptitude, interests and strengths.</p>
+          <p style="font-size:16.5px; line-height:1.75; color:#46567C; margin:22px 0 0; text-wrap:pretty;">Win Test 2026 exists to close that gap. It is a comprehensive academic assessment that helps students identify their strengths, recognise their learning gaps and understand their own potential — while recognising and rewarding excellence.</p>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:0 26px; margin-top:34px;">
+            <div style="padding:20px 0; border-top:1px solid rgba(22,35,63,0.2);">
+              <div style="font-family:'Spectral',serif; font-weight:500; font-size:30px; color:#B85A22;">100</div>
+              <div style="font-size:12.5px; letter-spacing:0.08em; text-transform:uppercase; color:#6E7B9B; margin-top:6px;">Marks</div>
+            </div>
+            <div style="padding:20px 0; border-top:1px solid rgba(22,35,63,0.2);">
+              <div style="font-family:'Spectral',serif; font-weight:500; font-size:30px; color:#B85A22;">05</div>
+              <div style="font-size:12.5px; letter-spacing:0.08em; text-transform:uppercase; color:#6E7B9B; margin-top:6px;">Sections</div>
+            </div>
+            <div style="padding:20px 0; border-top:1px solid rgba(22,35,63,0.2);">
+              <div style="font-family:'Spectral',serif; font-weight:500; font-size:30px; color:#B85A22;">02</div>
+              <div style="font-size:12.5px; letter-spacing:0.08em; text-transform:uppercase; color:#6E7B9B; margin-top:6px;">Media of instruction</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACADEMICS / FIVE AREAS -->
+    <div style="max-width:1280px; margin:0 auto; padding:100px 28px 0;">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:44px; flex-wrap:wrap; padding-bottom:28px; border-bottom:1px solid rgba(22,35,63,0.14);">
+        <div>
+          <div style="font-size:11px; letter-spacing:0.24em; text-transform:uppercase; color:#B85A22;">Academics</div>
+          <h2 style="font-family:'Spectral',serif; font-weight:300; font-size:clamp(30px,3.6vw,46px); line-height:1.14; margin:18px 0 0;">The Five Areas of Assessment</h2>
+        </div>
+        <p style="max-width:min(400px,100%); font-size:16px; line-height:1.7; color:#46567C; margin:0;">A single objective paper of two hours. English medium follows the CBSE syllabus; Malayalam medium follows the Kerala syllabus — always for the student's own class.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(214px,1fr)); gap:28px; margin-top:44px;">
+        <div style="min-width:0;">
+          <div style="position:relative; aspect-ratio:1/1; min-width:0; overflow:hidden; background:#F5EAE0;">
+            <img src="./assets/english.jpg" alt="English — comprehension, grammar and expression" style="display:block; width:100%; height:100%; object-fit:cover; object-position:6% 42%;">
+          </div>
+          <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-top:18px; padding-bottom:12px; border-bottom:1px solid rgba(22,35,63,0.14);">
+            <span style="font-family:'Spectral',serif; font-weight:500; font-size:21px;">English</span>
+            <span style="font-size:12px; letter-spacing:0.1em; white-space:nowrap; color:#6E7B9B;">15 MARKS</span>
+          </div>
+          <p style="font-size:14.5px; line-height:1.65; color:#46567C; margin:14px 0 0;">Comprehension, grammar and clarity of expression.</p>
+        </div>
+
+        <div style="min-width:0;">
+          <div style="position:relative; aspect-ratio:1/1; min-width:0; overflow:hidden; background:#F5EAE0;">
+            <img src="./assets/science.jpg" alt="Science — concepts, observation and curiosity" style="display:block; width:100%; height:100%; object-fit:cover;">
+          </div>
+          <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-top:18px; padding-bottom:12px; border-bottom:1px solid rgba(22,35,63,0.14);">
+            <span style="font-family:'Spectral',serif; font-weight:500; font-size:21px;">Science</span>
+            <span style="font-size:12px; letter-spacing:0.1em; white-space:nowrap; color:#6E7B9B;">20 MARKS</span>
+          </div>
+          <p style="font-size:14.5px; line-height:1.65; color:#46567C; margin:14px 0 0;">Conceptual understanding, observation and curiosity.</p>
+        </div>
+
+        <div style="min-width:0;">
+          <div style="position:relative; aspect-ratio:1/1; min-width:0; overflow:hidden; background:#F5EAE0;">
+            <img src="./assets/maths.jpg" alt="Mathematics — numbers, logic and problem solving" style="display:block; width:100%; height:100%; object-fit:cover;">
+          </div>
+          <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-top:18px; padding-bottom:12px; border-bottom:1px solid rgba(22,35,63,0.14);">
+            <span style="font-family:'Spectral',serif; font-weight:500; font-size:21px;">Mathematics</span>
+            <span style="font-size:12px; letter-spacing:0.1em; white-space:nowrap; color:#6E7B9B;">20 MARKS</span>
+          </div>
+          <p style="font-size:14.5px; line-height:1.65; color:#46567C; margin:14px 0 0;">Numerical fluency, logic and problem solving.</p>
+        </div>
+
+        <div style="min-width:0;">
+          <div style="position:relative; aspect-ratio:1/1; min-width:0; overflow:hidden; background:#F5EAE0;">
+            <img src="./assets/gk.jpg" alt="General Knowledge — awareness of the world" style="display:block; width:100%; height:100%; object-fit:cover;">
+          </div>
+          <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-top:18px; padding-bottom:12px; border-bottom:1px solid rgba(22,35,63,0.14);">
+            <span style="font-family:'Spectral',serif; font-weight:500; font-size:21px;">General Knowledge</span>
+            <span style="font-size:12px; letter-spacing:0.1em; white-space:nowrap; color:#6E7B9B;">15 MARKS</span>
+          </div>
+          <p style="font-size:14.5px; line-height:1.65; color:#46567C; margin:14px 0 0;">Awareness of the nation and the wider world.</p>
+        </div>
+
+        <div style="min-width:0;">
+          <div style="position:relative; aspect-ratio:1/1; min-width:0; overflow:hidden; background:#EDE9FB;">
+            
+          <img src="./pasted-1790186608603-0-mueevvr9-03in.png" alt="pasted-1790186608603-0" width="1008" height="1064" style="max-width: 100%; height: auto; display: block; object-fit: cover; width: 1008px; aspect-ratio: 1008 / 1064"><p style="margin: 0"><br></p></div>
+          <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-top:18px; padding-bottom:12px; border-bottom:2px solid #5C4BC4;">
+            <span style="font-family:'Spectral',serif; font-weight:500; font-size:21px;">Mental Ability</span>
+            <span style="font-size:12px; letter-spacing:0.1em; white-space:nowrap; color:#5C4BC4; font-weight:700;">30 MARKS</span>
+          </div>
+          <p style="font-size:14.5px; line-height:1.65; color:#46567C; margin:14px 0 0;">Reasoning, patterns and spatial thinking — the most heavily weighted area, and the one that cannot be crammed.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERFORMANCE REPORT -->
+    <div style="margin-top:100px; background:#16233F; color:#F1E7DC;">
+      <div style="max-width:1280px; margin:0 auto; padding:88px 28px;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:64px; align-items:center;">
+          <div style="min-width:0;">
+            <div style="font-size:11px; letter-spacing:0.24em; text-transform:uppercase; color:#F0A86E;">The Detailed Performance Report</div>
+            <h2 style="font-family:'Spectral',serif; font-weight:300; font-size:clamp(30px,3.6vw,46px); line-height:1.14; color:#FFFFFF; margin:20px 0 0;">Beyond marks, towards excellence</h2>
+            <p style="font-size:16.5px; line-height:1.75; color:#D6CFC6; margin:22px 0 0; max-width:480px;">Every student who appears receives a scorecard and a detailed report. The assessment is treated as a measuring instrument: what is strong, what needs attention, and where it may lead.</p>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:0 28px; margin-top:34px;">
+              <div style="padding:15px 0; border-top:1px solid rgba(255,255,255,0.22); font-size:14.5px;">Overall score out of 100</div>
+              <div style="padding:15px 0; border-top:1px solid rgba(255,255,255,0.22); font-size:14.5px;">Subject-wise performance analysis</div>
+              <div style="padding:15px 0; border-top:1px solid rgba(255,255,255,0.22); font-size:14.5px;">Strength analysis</div>
+              <div style="padding:15px 0; border-top:1px solid rgba(255,255,255,0.22); font-size:14.5px;">Areas of improvement</div>
+              <div style="padding:15px 0; border-top:1px solid rgba(255,255,255,0.22); font-size:14.5px;">State &amp; school rankings</div>
+              <div style="padding:15px 0; border-top:1px solid rgba(255,255,255,0.22); font-size:14.5px;">Career-oriented assessment</div>
+            </div>
+            <button type="button" onClick="{{ goReport }}" style="margin-top:34px; padding:14px 26px; border:1px solid rgba(255,255,255,0.5); border-radius:2px; background:transparent; color:#FFFFFF; font-size:14px; font-weight:600; letter-spacing:0.03em; white-space:nowrap; line-height:1.2; cursor:pointer;" style-hover="background:#E9834A; border-color:#E9834A; color:#16233F;">Read the Sample Report →</button>
+          </div>
+
+          <div style="min-width:0; padding:34px; background:rgba(251,245,238,0.07); border:1px solid rgba(255,255,255,0.2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);">
+            <div style="font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:#B9C0D2;">Specimen · Section-wise percentile</div>
+            <div style="display:flex; align-items:flex-end; gap:16px; height:220px; margin-top:26px;">
+              <div style="flex:1; align-self:stretch; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; gap:12px;">
+                <div style="width:100%; height:78%; background:#E9834A;"></div>
+                <span style="font-size:11px; letter-spacing:0.08em; color:#B9C0D2;">ENG</span>
+              </div>
+              <div style="flex:1; align-self:stretch; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; gap:12px;">
+                <div style="width:100%; height:88%; background:#8B78F0;"></div>
+                <span style="font-size:11px; letter-spacing:0.08em; color:#B9C0D2;">SCI</span>
+              </div>
+              <div style="flex:1; align-self:stretch; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; gap:12px;">
+                <div style="width:100%; height:54%; background:#E9834A;"></div>
+                <span style="font-size:11px; letter-spacing:0.08em; color:#B9C0D2;">MAT</span>
+              </div>
+              <div style="flex:1; align-self:stretch; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; gap:12px;">
+                <div style="width:100%; height:70%; background:#8B78F0;"></div>
+                <span style="font-size:11px; letter-spacing:0.08em; color:#B9C0D2;">GK</span>
+              </div>
+              <div style="flex:1; align-self:stretch; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; gap:12px;">
+                <div style="width:100%; height:96%; background:#FBE3D2;"></div>
+                <span style="font-size:11px; letter-spacing:0.08em; color:#B9C0D2;">MA</span>
+              </div>
+            </div>
+            <div style="display:flex; justify-content:space-between; gap:18px; margin-top:26px; padding-top:22px; border-top:1px solid rgba(255,255,255,0.2);">
+              <div>
+                <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#B9C0D2;">State Rank</div>
+                <div style="font-family:'Spectral',serif; font-weight:500; font-size:26px; color:#FFFFFF; margin-top:4px;">142</div>
+              </div>
+              <div>
+                <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#B9C0D2;">School Rank</div>
+                <div style="font-family:'Spectral',serif; font-weight:500; font-size:26px; color:#FFFFFF; margin-top:4px;">03</div>
+              </div>
+              <div>
+                <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#B9C0D2;">Percentile</div>
+                <div style="font-family:'Spectral',serif; font-weight:500; font-size:26px; color:#FFFFFF; margin-top:4px;">94.6</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BENEFITS -->
+    <div style="max-width:1280px; margin:0 auto; padding:96px 28px 0;">
+      <div style="font-size:11px; letter-spacing:0.24em; text-transform:uppercase; color:#B85A22;">Why It Matters</div>
+      <h2 style="font-family:'Spectral',serif; font-weight:300; font-size:clamp(30px,3.6vw,46px); line-height:1.14; margin:18px 0 46px;">Two sides of the same measurement</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(360px,1fr)); gap:0 56px;">
+        <div style="min-width:0; padding:36px 0 40px; border-top:2px solid #16233F;">
+          <div style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#B85A22;">01 — For Students</div>
+          <h3 style="font-family:'Spectral',serif; font-weight:400; font-size:27px; margin:16px 0 0;">An honest measure of ability</h3>
+          <div style="display:flex; flex-direction:column; gap:0; margin-top:26px;">
+            <div style="padding:15px 0; border-top:1px solid rgba(22,35,63,0.12); font-size:15.5px; line-height:1.6;">Discover the subjects in which you are strongest.</div>
+            <div style="padding:15px 0; border-top:1px solid rgba(22,35,63,0.12); font-size:15.5px; line-height:1.6;">Understand the subjects that need greater attention.</div>
+            <div style="padding:15px 0; border-top:1px solid rgba(22,35,63,0.12); font-size:15.5px; line-height:1.6;">Gain confidence through a detailed report.</div>
+            <div style="padding:15px 0; border-top:1px solid rgba(22,35,63,0.12); font-size:15.5px; line-height:1.6;">Earn the opportunity to win scholarships and awards.</div>
+          </div>
+        </div>
+        <div style="min-width:0; padding:36px 0 40px; border-top:2px solid #16233F;">
+          <div style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#5C4BC4;">02 — For Schools</div>
+          <h3 style="font-family:'Spectral',serif; font-weight:400; font-size:27px; margin:16px 0 0;">Assessment data you can teach with</h3>
+          <div style="display:flex; flex-direction:column; gap:0; margin-top:26px;">
+            <div style="padding:15px 0; border-top:1px solid rgba(22,35,63,0.12); font-size:15.5px; line-height:1.6;">Measure the academic performance of your students.</div>
+            <div style="padding:15px 0; border-top:1px solid rgba(22,35,63,0.12); font-size:15.5px; line-height:1.6;">Compare class-wise and school-wise performance.</div>
+            <div style="padding:15px 0; border-top:1px solid rgba(22,35,63,0.12); font-size:15.5px; line-height:1.6;">Identify learning gaps early in the year.</div>
+            <div style="padding:15px 0; border-top:1px solid rgba(22,35,63,0.12); font-size:15.5px; line-height:1.6;">Refine teaching strategy using assessment data.</div>
+            <div style="padding:15px 0; border-top:1px solid rgba(22,35,63,0.12); font-size:15.5px; line-height:1.6;">Strengthen the academic profile of the school.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AWARDS -->
+    <sc-if value="{{ showAwards }}" hint-placeholder-val="{{ true }}">
+    <div style="max-width:1280px; margin:0 auto; padding:96px 28px 0;">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:34px; flex-wrap:wrap; padding-bottom:28px; border-bottom:1px solid rgba(22,35,63,0.14);">
+        <div>
+          <div style="font-size:11px; letter-spacing:0.24em; text-transform:uppercase; color:#B85A22;">Scholarships &amp; Awards</div>
+          <h2 style="font-family:'Spectral',serif; font-weight:300; font-size:clamp(30px,3.6vw,46px); line-height:1.14; margin:18px 0 0;">Excellence, recognised</h2>
+        </div>
+        <div style="font-size:13px; letter-spacing:0.06em; color:#6E7B9B;">Every participant receives a certificate and a scorecard</div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:28px; margin-top:44px;">
+        <div style="min-width:0; padding:32px; background:#16233F; color:#F1E7DC;">
+          <div style="font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:#F0A86E;">First Rank</div>
+          <div style="font-family:'Spectral',serif; font-weight:400; font-size:40px; margin-top:14px; line-height:1; color:#FFFFFF;">₹5,000</div>
+          <div style="font-size:14.5px; line-height:1.6; margin-top:14px; color:#D6CFC6;">Cash prize, gold medal and certificate</div>
+        </div>
+        <div style="min-width:0; padding:32px; background:#F5EAE0;">
+          <div style="font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:#B85A22;">Class Topper</div>
+          <div style="font-family:'Spectral',serif; font-weight:400; font-size:40px; margin-top:14px; line-height:1;">₹500</div>
+          <div style="font-size:14.5px; line-height:1.6; margin-top:14px; color:#46567C;">Cash prize, gold medal and certificate</div>
+        </div>
+        <div style="min-width:0; padding:32px; background:#EDE9FB;">
+          <div style="font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:#5C4BC4;">Above 80 Per Cent</div>
+          <div style="font-family:'Spectral',serif; font-weight:400; font-size:40px; margin-top:14px; line-height:1;">Gold</div>
+          <div style="font-size:14.5px; line-height:1.6; margin-top:14px; color:#46567C;">A gold medal for every student scoring above 80%</div>
+        </div>
+        <div style="min-width:0; padding:32px; background:#F5EAE0;">
+          <div style="font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:#B85A22;">Rank Holders</div>
+          <div style="font-family:'Spectral',serif; font-weight:400; font-size:40px; margin-top:14px; line-height:1;">Cash</div>
+          <div style="font-size:14.5px; line-height:1.6; margin-top:14px; color:#46567C;">Other attractive cash prizes across rank holders</div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- REGISTRATION -->
+    <div id="register" style="max-width:1280px; margin:0 auto; padding:96px 28px 0;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(360px,1fr)); gap:64px; padding:clamp(28px,3.4vw,52px); background:#F5EAE0; border-top:2px solid #16233F;">
+        <div style="min-width:0;">
+          <div style="font-size:11px; letter-spacing:0.24em; text-transform:uppercase; color:#B85A22;">Admissions · Registration Form</div>
+          <h2 style="font-family:'Spectral',serif; font-weight:300; font-size:clamp(28px,3.2vw,42px); line-height:1.14; margin:18px 0 0;">Every child has a strength. Let us discover it.</h2>
+          <div style="display:flex; flex-direction:column; gap:0; margin-top:30px;">
+            <div style="display:flex; justify-content:space-between; gap:14px; padding:15px 0; border-top:1px solid rgba(22,35,63,0.16); font-size:15px;"><span style="color:#46567C;">Registration fee</span><strong style="font-weight:600;">{{ feeLabel }}</strong></div>
+            <div style="display:flex; justify-content:space-between; gap:14px; padding:15px 0; border-top:1px solid rgba(22,35,63,0.16); font-size:15px;"><span style="color:#46567C;">Registration closes</span><strong style="font-weight:600;">10 November 2026</strong></div>
+            <div style="display:flex; justify-content:space-between; gap:14px; padding:15px 0; border-top:1px solid rgba(22,35,63,0.16); font-size:15px;"><span style="color:#46567C;">Date of examination</span><strong style="font-weight:600;">5 December 2026</strong></div>
+            <div style="display:flex; justify-content:space-between; gap:14px; padding:15px 0; border-top:1px solid rgba(22,35,63,0.16); border-bottom:1px solid rgba(22,35,63,0.16); font-size:15px;"><span style="color:#46567C;">Venue</span><strong style="font-weight:600;">Respective schools</strong></div>
+          </div>
+          <p style="font-size:14.5px; line-height:1.7; color:#46567C; margin:24px 0 0;">Complete this form and remit the fee of ₹220 to the Win Test coordinator at your school. The hall ticket is issued at the school once the fee has been recorded; no online payment is required.</p>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px; min-width:0;">
+          <div style="grid-column:1/-1; display:flex; flex-direction:column; gap:9px; min-width:0;">
+            <label style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Name of Student</label>
+            <input type="text" placeholder="Full name" style="padding:14px 15px; border:1px solid rgba(22,35,63,0.28); border-radius:2px; background:#FFFFFF; color:#16233F; font-size:15px; outline:none; width:100%; min-width:0; box-sizing:border-box;" style-focus="border-color:#16233F; box-shadow:0 0 0 2px rgba(22,35,63,0.12);">
+          </div>
+          <div style="display:flex; flex-direction:column; gap:9px; min-width:0;">
+            <label style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Class</label>
+            <input type="text" placeholder="LKG – Class XII" style="padding:14px 15px; border:1px solid rgba(22,35,63,0.28); border-radius:2px; background:#FFFFFF; color:#16233F; font-size:15px; outline:none; width:100%; min-width:0; box-sizing:border-box;" style-focus="border-color:#16233F; box-shadow:0 0 0 2px rgba(22,35,63,0.12);">
+          </div>
+          <div style="display:flex; flex-direction:column; gap:9px; min-width:0;">
+            <label style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Medium of Instruction</label>
+            <select style="padding:14px 15px; border:1px solid rgba(22,35,63,0.28); border-radius:2px; background:#FFFFFF; color:#16233F; font-size:15px; outline:none; width:100%; min-width:0; box-sizing:border-box;">
+              <option>English — CBSE syllabus</option>
+              <option>Malayalam — Kerala syllabus</option>
+            </select>
+          </div>
+          <div style="grid-column:1/-1; display:flex; flex-direction:column; gap:9px; min-width:0;">
+            <label style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Name of School</label>
+            <input type="text" placeholder="School name" style="padding:14px 15px; border:1px solid rgba(22,35,63,0.28); border-radius:2px; background:#FFFFFF; color:#16233F; font-size:15px; outline:none; width:100%; min-width:0; box-sizing:border-box;" style-focus="border-color:#16233F; box-shadow:0 0 0 2px rgba(22,35,63,0.12);">
+          </div>
+          <div style="display:flex; flex-direction:column; gap:9px; min-width:0;">
+            <label style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Parent's Mobile</label>
+            <input type="tel" placeholder="+91" style="padding:14px 15px; border:1px solid rgba(22,35,63,0.28); border-radius:2px; background:#FFFFFF; color:#16233F; font-size:15px; outline:none; width:100%; min-width:0; box-sizing:border-box;" style-focus="border-color:#16233F; box-shadow:0 0 0 2px rgba(22,35,63,0.12);">
+          </div>
+          <div style="display:flex; flex-direction:column; gap:9px; min-width:0;">
+            <label style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Email</label>
+            <input type="email" placeholder="parent@email.com" style="padding:14px 15px; border:1px solid rgba(22,35,63,0.28); border-radius:2px; background:#FFFFFF; color:#16233F; font-size:15px; outline:none; width:100%; min-width:0; box-sizing:border-box;" style-focus="border-color:#16233F; box-shadow:0 0 0 2px rgba(22,35,63,0.12);">
+          </div>
+          <button type="button" onClick="{{ submit }}" style="grid-column:1/-1; margin-top:8px; padding:16px 24px; border:1px solid #16233F; border-radius:2px; background:#16233F; color:#FBF5EE; font-size:14.5px; font-weight:600; letter-spacing:0.04em; white-space:nowrap; line-height:1.2; cursor:pointer;" style-hover="background:#E9834A; border-color:#E9834A; color:#16233F;">{{ ctaLabel }}</button>
+          <div style="grid-column:1/-1; font-size:13px; color:#6E7B9B; text-align:center;">{{ submitNote }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ ABOUT ============ -->
+  <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1280px; margin:0 auto; padding:70px 28px 0;">
+    <div style="font-size:11px; letter-spacing:0.24em; text-transform:uppercase; color:#B85A22;">About Us</div>
+    <h1 style="font-family:'Spectral',serif; font-weight:300; font-size:clamp(34px,4.4vw,58px); line-height:1.1; margin:20px 0 0; max-width:760px; text-wrap:pretty;">A candle, a book, and a quiet mind</h1>
+    <p style="font-family:'Spectral',serif; font-size:20px; line-height:1.68; color:#2B3A5E; max-width:min(680px,100%); margin:26px 0 0; text-wrap:pretty;">Win Test 2026 is a national-level academic assessment and scholarship programme for students from LKG to Class XII. It helps students discover their strengths, identify learning gaps and unlock their true potential, while recognising and rewarding excellence.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:0 40px; margin-top:56px;">
+      <div style="min-width:0; padding:30px 0 34px; border-top:1px solid rgba(22,35,63,0.2);">
+        <div style="font-family:'Spectral',serif; font-weight:400; font-size:34px; color:#B85A22; line-height:1;">01</div>
+        <h3 style="font-family:'Spectral',serif; font-weight:500; font-size:22px; margin:18px 0 0;">Register at your school</h3>
+        <p style="font-size:14.5px; line-height:1.7; color:#46567C; margin:12px 0 0;">Complete the form, remit ₹220 to the school coordinator and collect the hall ticket. Registration closes on 10 November 2026.</p>
+      </div>
+      <div style="min-width:0; padding:30px 0 34px; border-top:1px solid rgba(22,35,63,0.2);">
+        <div style="font-family:'Spectral',serif; font-weight:400; font-size:34px; color:#B85A22; line-height:1;">02</div>
+        <h3 style="font-family:'Spectral',serif; font-weight:500; font-size:22px; margin:18px 0 0;">Appear for the paper</h3>
+        <p style="font-size:14.5px; line-height:1.7; color:#46567C; margin:12px 0 0;">5 December 2026, from 10 a.m. to 12 noon, at the respective schools of the participants. Five sections, 100 marks, objective format.</p>
+      </div>
+      <div style="min-width:0; padding:30px 0 34px; border-top:1px solid rgba(22,35,63,0.2);">
+        <div style="font-family:'Spectral',serif; font-weight:400; font-size:34px; color:#5C4BC4; line-height:1;">03</div>
+        <h3 style="font-family:'Spectral',serif; font-weight:500; font-size:22px; margin:18px 0 0;">Receive the report</h3>
+        <p style="font-size:14.5px; line-height:1.7; color:#46567C; margin:12px 0 0;">A scorecard and detailed performance report, with state and school rankings — and medals and scholarships for the highest scorers.</p>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:56px; margin-top:80px;">
+      <div style="min-width:0;">
+        <h2 style="font-family:'Spectral',serif; font-weight:300; font-size:34px; margin:0;">Enquiries</h2>
+        <p style="font-size:15.5px; line-height:1.7; color:#46567C; margin:14px 0 26px;">Schools wishing to host the assessment, and parents with questions, may write to the same desk.</p>
+        <div style="display:flex; flex-direction:column; gap:0;">
+          <div style="display:flex; flex-direction:column; gap:6px; padding:18px 0; border-top:1px solid rgba(22,35,63,0.14);">
+            <span style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Email</span>
+            <a href="mailto:wintestscholars@gmail.com" style="font-size:17px;">wintestscholars@gmail.com</a>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px; padding:18px 0; border-top:1px solid rgba(22,35,63,0.14);">
+            <span style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Telephone</span>
+            <a href="tel:+919946186647" style="font-size:17px;">+91 99461 86647</a>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px; padding:18px 0; border-top:1px solid rgba(22,35,63,0.14); border-bottom:1px solid rgba(22,35,63,0.14);">
+            <span style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Website</span>
+            <a href="https://www.wintest.org" style="font-size:17px;">www.wintest.org</a>
+          </div>
+        </div>
+        <p style="font-size:13px; line-height:1.7; color:#6E7B9B; margin:24px 0 0; padding:16px 18px; background:#F5EAE0;">The name of the organising body and its office address are yet to be supplied; they will be placed here.</p>
+      </div>
+
+      <div style="min-width:0;">
+        <h2 style="font-family:'Spectral',serif; font-weight:300; font-size:34px; margin:0;">Frequently Asked</h2>
+        <div style="display:flex; flex-direction:column; gap:0; margin-top:22px;">
+          <div style="padding:22px 0; border-top:1px solid rgba(22,35,63,0.14);">
+            <div style="font-family:'Spectral',serif; font-weight:500; font-size:19px;">Is this a competitive entrance examination?</div>
+            <p style="font-size:14.5px; line-height:1.7; color:#46567C; margin:8px 0 0;">No. It is an assessment with scholarships attached; no student is excluded from anything on its basis.</p>
+          </div>
+          <div style="padding:22px 0; border-top:1px solid rgba(22,35,63,0.14);">
+            <div style="font-family:'Spectral',serif; font-weight:500; font-size:19px;">In which medium may my child write?</div>
+            <p style="font-size:14.5px; line-height:1.7; color:#46567C; margin:8px 0 0;">English or Malayalam. The English paper follows the CBSE syllabus and the Malayalam paper the Kerala syllabus.</p>
+          </div>
+          <div style="padding:22px 0; border-top:1px solid rgba(22,35,63,0.14);">
+            <div style="font-family:'Spectral',serif; font-weight:500; font-size:19px;">Is coaching necessary?</div>
+            <p style="font-size:14.5px; line-height:1.7; color:#46567C; margin:8px 0 0;">No. The paper remains within the student's own class syllabus, and Mental Ability cannot be crammed.</p>
+          </div>
+          <div style="padding:22px 0; border-top:1px solid rgba(22,35,63,0.14); border-bottom:1px solid rgba(22,35,63,0.14);">
+            <div style="font-family:'Spectral',serif; font-weight:500; font-size:19px;">What if my school is not registered?</div>
+            <p style="font-size:14.5px; line-height:1.7; color:#46567C; margin:8px 0 0;">Ask your class teacher to write to us. Onboarding a school takes only a few days.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:80px; padding:clamp(28px,3.4vw,48px); background:#16233F; color:#F1E7DC; display:flex; justify-content:space-between; align-items:center; gap:28px; flex-wrap:wrap;">
+      <div>
+        <div style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#F0A86E;">Every child has a strength</div>
+        <div style="font-family:'Spectral',serif; font-weight:300; font-size:clamp(26px,3vw,38px); line-height:1.16; margin-top:12px; color:#FFFFFF;">Let us discover it. Register by 10 November.</div>
+      </div>
+      <button type="button" onClick="{{ goRegister }}" style="padding:16px 30px; border:1px solid #E9834A; border-radius:2px; background:#E9834A; color:#16233F; font-size:14.5px; font-weight:700; letter-spacing:0.03em; white-space:nowrap; line-height:1.2; cursor:pointer;" style-hover="background:#FBE3D2; border-color:#FBE3D2;">Register Now</button>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ ACADEMICS / SYLLABUS ============ -->
+  <sc-if value="{{ isSyllabus }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1280px; margin:0 auto; padding:70px 28px 0;">
+    <div style="font-size:11px; letter-spacing:0.24em; text-transform:uppercase; color:#B85A22;">Academics</div>
+    <h1 style="font-family:'Spectral',serif; font-weight:300; font-size:clamp(34px,4.4vw,58px); line-height:1.1; margin:20px 0 0; max-width:760px;">The Curriculum &amp; Scheme of Examination</h1>
+    <p style="font-size:17px; line-height:1.75; color:#46567C; max-width:min(700px,100%); margin:24px 0 0; text-wrap:pretty;">The paper is set on the syllabus of the student's own class and does not extend above grade level. For the English medium it follows the CBSE syllabus; for the Malayalam medium, the Kerala syllabus. Mental Ability alone is not syllabus-bound: it examines reasoning, patterns and spatial thinking.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:28px; margin-top:44px;">
+      <div style="padding:30px; background:#F5EAE0;">
+        <div style="font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:#B85A22;">English Medium</div>
+        <div style="font-family:'Spectral',serif; font-weight:400; font-size:27px; margin-top:12px;">CBSE syllabus</div>
+      </div>
+      <div style="padding:30px; background:#EDE9FB;">
+        <div style="font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:#5C4BC4;">Malayalam Medium</div>
+        <div style="font-family:'Spectral',serif; font-weight:400; font-size:27px; margin-top:12px;">Kerala syllabus</div>
+      </div>
+    </div>
+
+    <h2 style="font-family:'Spectral',serif; font-weight:300; font-size:34px; margin:70px 0 0;">Scheme by class group</h2>
+    <div style="margin-top:28px; border-top:1px solid rgba(22,35,63,0.14);">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:28px; padding:28px 0; border-bottom:1px solid rgba(22,35,63,0.14);">
+        <div><div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Group A</div><div style="font-family:'Spectral',serif; font-weight:500; font-size:23px; margin-top:8px;">LKG – Class II</div></div>
+        <div style="grid-column:span 2; min-width:0;"><p style="font-size:15px; line-height:1.75; color:#46567C; margin:0;">Picture-based and orally styled questions: letters and sounds, counting and shapes, everyday awareness and simple odd-one-out reasoning.</p></div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:28px; padding:28px 0; border-bottom:1px solid rgba(22,35,63,0.14);">
+        <div><div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Group B</div><div style="font-family:'Spectral',serif; font-weight:500; font-size:23px; margin-top:8px;">Class III – V</div></div>
+        <div style="grid-column:span 2; min-width:0;"><p style="font-size:15px; line-height:1.75; color:#46567C; margin:0;">Reading comprehension and the basics of grammar, the four operations and fractions, environmental science, national and general awareness, series and patterns.</p></div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:28px; padding:28px 0; border-bottom:1px solid rgba(22,35,63,0.14);">
+        <div><div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Group C</div><div style="font-family:'Spectral',serif; font-weight:500; font-size:23px; margin-top:8px;">Class VI – VIII</div></div>
+        <div style="grid-column:span 2; min-width:0;"><p style="font-size:15px; line-height:1.75; color:#46567C; margin:0;">Comprehension and usage, integers, ratio and geometry, the fundamentals of physics, chemistry and biology, current affairs, coding-decoding and logical reasoning.</p></div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:28px; padding:28px 0; border-bottom:1px solid rgba(22,35,63,0.14);">
+        <div><div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Group D</div><div style="font-family:'Spectral',serif; font-weight:500; font-size:23px; margin-top:8px;">Class IX – X</div></div>
+        <div style="grid-column:span 2; min-width:0;"><p style="font-size:15px; line-height:1.75; color:#46567C; margin:0;">Advanced comprehension, algebra, trigonometry and mensuration, applied science, civics and world affairs, analytical reasoning and data interpretation.</p></div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:28px; padding:28px 0; border-bottom:1px solid rgba(22,35,63,0.14);">
+        <div><div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Group E</div><div style="font-family:'Spectral',serif; font-weight:500; font-size:23px; margin-top:8px;">Class XI – XII</div></div>
+        <div style="grid-column:span 2; min-width:0;"><p style="font-size:15px; line-height:1.75; color:#46567C; margin:0;">A stream-neutral core: language proficiency, quantitative aptitude, the fundamentals of science, contemporary affairs, and higher-order reasoning and aptitude.</p></div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:56px; margin-top:70px;">
+      <div style="min-width:0;">
+        <h2 style="font-family:'Spectral',serif; font-weight:300; font-size:34px; margin:0;">Practice papers</h2>
+        <p style="font-size:15px; line-height:1.7; color:#46567C; margin:14px 0 24px;">One model paper per class group, with answer keys. These will be published once the papers have been finalised.</p>
+        <div style="display:flex; flex-direction:column; gap:0;">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:14px; padding:16px 0; border-top:1px solid rgba(22,35,63,0.14); font-size:15px;"><span>Model paper — Class III to V</span><span style="font-size:11px; letter-spacing:0.14em; color:#6E7B9B;">SHORTLY</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:14px; padding:16px 0; border-top:1px solid rgba(22,35,63,0.14); font-size:15px;"><span>Model paper — Class VI to VIII</span><span style="font-size:11px; letter-spacing:0.14em; color:#6E7B9B;">SHORTLY</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:14px; padding:16px 0; border-top:1px solid rgba(22,35,63,0.14); font-size:15px;"><span>Model paper — Class IX to X</span><span style="font-size:11px; letter-spacing:0.14em; color:#6E7B9B;">SHORTLY</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:14px; padding:16px 0; border-top:1px solid rgba(22,35,63,0.14); border-bottom:1px solid rgba(22,35,63,0.14); font-size:15px;"><span>Mental Ability sampler — all classes</span><span style="font-size:11px; letter-spacing:0.14em; color:#6E7B9B;">SHORTLY</span></div>
+        </div>
+      </div>
+      <div style="min-width:0; padding:34px; background:#F5EAE0;">
+        <h2 style="font-family:'Spectral',serif; font-weight:300; font-size:34px; margin:0;">On the day</h2>
+        <div style="display:flex; flex-direction:column; gap:0; margin-top:22px;">
+          <div style="display:flex; justify-content:space-between; gap:14px; padding:15px 0; border-top:1px solid rgba(22,35,63,0.16); font-size:15px;"><span style="color:#46567C;">Date</span><strong style="font-weight:600;">5 December 2026</strong></div>
+          <div style="display:flex; justify-content:space-between; gap:14px; padding:15px 0; border-top:1px solid rgba(22,35,63,0.16); font-size:15px;"><span style="color:#46567C;">Time</span><strong style="font-weight:600;">10 a.m. – 12 noon</strong></div>
+          <div style="display:flex; justify-content:space-between; gap:14px; padding:15px 0; border-top:1px solid rgba(22,35,63,0.16); font-size:15px;"><span style="color:#46567C;">Format</span><strong style="font-weight:600;">Objective, 100 marks</strong></div>
+          <div style="display:flex; justify-content:space-between; gap:14px; padding:15px 0; border-top:1px solid rgba(22,35,63,0.16); font-size:15px;"><span style="color:#46567C;">Venue</span><strong style="font-weight:600;">Respective schools</strong></div>
+          <div style="display:flex; justify-content:space-between; gap:14px; padding:15px 0; border-top:1px solid rgba(22,35,63,0.16); border-bottom:1px solid rgba(22,35,63,0.16); font-size:15px;"><span style="color:#46567C;">To be carried</span><strong style="font-weight:600;">Hall ticket, pencil, eraser</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ PERFORMANCE REPORT ============ -->
+  <sc-if value="{{ isReport }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1280px; margin:0 auto; padding:70px 28px 0;">
+    <div style="font-size:11px; letter-spacing:0.24em; text-transform:uppercase; color:#B85A22;">Specimen Performance Report</div>
+    <h1 style="font-family:'Spectral',serif; font-weight:300; font-size:clamp(34px,4.4vw,58px); line-height:1.1; margin:20px 0 0; max-width:800px;">What every student takes home</h1>
+    <p style="font-size:17px; line-height:1.75; color:#46567C; max-width:min(660px,100%); margin:24px 0 0;">A specimen report prepared for an illustrative Class VIII student. The actual report is issued after the examination, together with the scorecard and certificate.</p>
+
+    <div style="margin-top:48px; padding:clamp(26px,3vw,44px); background:#FFFFFF; border:1px solid rgba(22,35,63,0.16);">
+      <div style="display:flex; justify-content:space-between; gap:28px; flex-wrap:wrap; padding-bottom:28px; border-bottom:1px solid rgba(22,35,63,0.16);">
+        <div style="min-width:0;">
+          <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Student</div>
+          <div style="font-family:'Spectral',serif; font-weight:500; font-size:31px; margin-top:8px;">Aparna R. Menon</div>
+          <div style="font-size:14.5px; color:#46567C; margin-top:8px;">Class VIII · English medium · Roll No. WT26-014892</div>
+        </div>
+        <div style="display:flex; gap:1px; background:rgba(22,35,63,0.16); flex-wrap:wrap;">
+          <div style="background:#F5EAE0; padding:16px 22px;">
+            <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#B85A22;">State Rank</div>
+            <div style="font-family:'Spectral',serif; font-weight:500; font-size:26px; margin-top:4px;">142</div>
+          </div>
+          <div style="background:#EDE9FB; padding:16px 22px;">
+            <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#5C4BC4;">School Rank</div>
+            <div style="font-family:'Spectral',serif; font-weight:500; font-size:26px; margin-top:4px;">03</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:44px; margin-top:34px;">
+        <div style="min-width:0; display:flex; align-items:center; gap:28px; flex-wrap:wrap;">
+          <div style="position:relative; width:168px; height:168px; border-radius:50%; background:conic-gradient(#E9834A 0turn 0.82turn, rgba(22,35,63,0.12) 0.82turn 1turn); display:grid; place-items:center; flex:none;">
+            <div style="width:130px; height:130px; border-radius:50%; background:#FFFFFF; display:grid; place-items:center;">
+              <div style="text-align:center;">
+                <div style="font-family:'Spectral',serif; font-weight:400; font-size:48px; line-height:1;">82</div>
+                <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B; margin-top:6px;">Out of 100</div>
+              </div>
+            </div>
+          </div>
+          <div style="min-width:170px;">
+            <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Overall</div>
+            <div style="font-family:'Spectral',serif; font-weight:500; font-size:24px; margin-top:8px;">94.6 percentile</div>
+            <p style="font-size:14.5px; line-height:1.7; color:#46567C; margin:10px 0 0;">Placed higher than 94.6% of the Class VIII students who appeared.</p>
+            <div style="display:inline-flex; margin-top:16px; padding:9px 16px; background:#E9834A; color:#16233F; font-size:12.5px; font-weight:700; letter-spacing:0.04em;">GOLD MEDAL — ABOVE 80%</div>
+          </div>
+        </div>
+
+        <div style="min-width:0;">
+          <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Subject-wise performance</div>
+          <div style="display:flex; flex-direction:column; gap:16px; margin-top:20px;">
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; justify-content:space-between; font-size:14.5px;"><span>English</span><span style="color:#46567C;">13 / 15 · 87%</span></div>
+              <div style="height:7px; background:rgba(22,35,63,0.12);"><div style="width:87%; height:100%; background:#E9834A;"></div></div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; justify-content:space-between; font-size:14.5px;"><span>Science</span><span style="color:#46567C;">17 / 20 · 85%</span></div>
+              <div style="height:7px; background:rgba(22,35,63,0.12);"><div style="width:85%; height:100%; background:#5C4BC4;"></div></div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; justify-content:space-between; font-size:14.5px;"><span>Mathematics</span><span style="color:#46567C;">12 / 20 · 60%</span></div>
+              <div style="height:7px; background:rgba(22,35,63,0.12);"><div style="width:60%; height:100%; background:#E9834A;"></div></div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; justify-content:space-between; font-size:14.5px;"><span>General Knowledge</span><span style="color:#46567C;">11 / 15 · 73%</span></div>
+              <div style="height:7px; background:rgba(22,35,63,0.12);"><div style="width:73%; height:100%; background:#5C4BC4;"></div></div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; justify-content:space-between; font-size:14.5px;"><span>Mental Ability</span><span style="color:#46567C;">29 / 30 · 97%</span></div>
+              <div style="height:7px; background:rgba(22,35,63,0.12);"><div style="width:97%; height:100%; background:#E9834A;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; margin-top:40px;">
+        <div style="min-width:0; padding:28px; background:#EDE9FB;">
+          <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#5C4BC4;">Strength Analysis</div>
+          <h3 style="font-family:'Spectral',serif; font-weight:500; font-size:21px; margin:12px 0 0;">Reasoning and pattern-finding</h3>
+          <p style="font-size:14.5px; line-height:1.7; color:#46567C; margin:10px 0 0;">Near-perfect in Mental Ability, with strong verbal comprehension. This student reasons more readily than she recalls.</p>
+        </div>
+        <div style="min-width:0; padding:28px; background:#F5EAE0;">
+          <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#B85A22;">Areas of Improvement</div>
+          <h3 style="font-family:'Spectral',serif; font-weight:500; font-size:21px; margin:12px 0 0;">Mathematics — word problems</h3>
+          <p style="font-size:14.5px; line-height:1.7; color:#46567C; margin:10px 0 0;">Arithmetic is secure. Multi-step word problems and fractions account for six of the eight marks lost.</p>
+        </div>
+        <div style="min-width:0; padding:28px; background:#FFFFFF; border:1px solid rgba(22,35,63,0.16);">
+          <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Career-oriented Assessment</div>
+          <h3 style="font-family:'Spectral',serif; font-weight:500; font-size:21px; margin:12px 0 0;">Analytical and research-leaning</h3>
+          <p style="font-size:14.5px; line-height:1.7; color:#46567C; margin:10px 0 0;">Aptitude indicates science, design and data-oriented paths. Indicative only, and intended to open a conversation rather than close one.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:34px; padding-top:28px; border-top:1px solid rgba(22,35,63,0.16);">
+        <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Recommended next steps</div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:28px; margin-top:20px;">
+          <div style="font-size:15px; line-height:1.7; color:#2B3A5E;"><strong style="font-family:'Spectral',serif; font-weight:500; color:#B85A22;">I.</strong> Twenty minutes of word problems, four days a week, for eight weeks.</div>
+          <div style="font-size:15px; line-height:1.7; color:#2B3A5E;"><strong style="font-family:'Spectral',serif; font-weight:500; color:#B85A22;">II.</strong> Sustain the reasoning momentum through puzzles rather than drills.</div>
+          <div style="font-size:15px; line-height:1.7; color:#2B3A5E;"><strong style="font-family:'Spectral',serif; font-weight:500; color:#B85A22;">III.</strong> Reappear next year, to measure the change and not merely the score.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:16px; margin-top:40px; flex-wrap:wrap;">
+      <button type="button" onClick="{{ goRegister }}" style="padding:15px 28px; border:1px solid #16233F; border-radius:2px; background:#16233F; color:#FBF5EE; font-size:14.5px; font-weight:600; letter-spacing:0.03em; white-space:nowrap; line-height:1.2; cursor:pointer;" style-hover="background:#E9834A; border-color:#E9834A; color:#16233F;">Register for Win Test 2026</button>
+      <button type="button" onClick="{{ goSyllabus }}" style="padding:15px 28px; border:1px solid rgba(22,35,63,0.3); border-radius:2px; background:transparent; color:#16233F; font-size:14.5px; font-weight:600; letter-spacing:0.03em; white-space:nowrap; line-height:1.2; cursor:pointer;" style-hover="background:#F5EAE0;">View the Curriculum</button>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ RESULTS ============ -->
+  <sc-if value="{{ isResults }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1280px; margin:0 auto; padding:70px 28px 0;">
+    <div style="font-size:11px; letter-spacing:0.24em; text-transform:uppercase; color:#B85A22;">Results &amp; Rankings</div>
+    <h1 style="font-family:'Spectral',serif; font-weight:300; font-size:clamp(34px,4.4vw,58px); line-height:1.1; margin:20px 0 0;">Find your result</h1>
+    <p style="font-size:17px; line-height:1.75; color:#46567C; max-width:min(600px,100%); margin:24px 0 0;">Results are published after the examination of 5 December 2026. Kindly enter the roll number printed on the hall ticket.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1px; margin-top:48px; background:rgba(22,35,63,0.16); border:1px solid rgba(22,35,63,0.16);">
+      <div style="min-width:0; padding:36px; background:#FFFFFF;">
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div style="display:flex; flex-direction:column; gap:9px; min-width:0;">
+            <label style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Roll Number</label>
+            <input type="text" placeholder="WT26-014892" style="padding:14px 15px; border:1px solid rgba(22,35,63,0.28); border-radius:2px; background:#FFFFFF; color:#16233F; font-size:15px; outline:none; width:100%; min-width:0; box-sizing:border-box;" style-focus="border-color:#16233F; box-shadow:0 0 0 2px rgba(22,35,63,0.12);">
+          </div>
+          <div style="display:flex; flex-direction:column; gap:9px; min-width:0;">
+            <label style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Date of Birth</label>
+            <input type="text" placeholder="DD / MM / YYYY" style="padding:14px 15px; border:1px solid rgba(22,35,63,0.28); border-radius:2px; background:#FFFFFF; color:#16233F; font-size:15px; outline:none; width:100%; min-width:0; box-sizing:border-box;" style-focus="border-color:#16233F; box-shadow:0 0 0 2px rgba(22,35,63,0.12);">
+          </div>
+          <button type="button" onClick="{{ lookup }}" style="padding:15px 24px; border:1px solid #16233F; border-radius:2px; background:#16233F; color:#FBF5EE; font-size:14.5px; font-weight:600; letter-spacing:0.04em; white-space:nowrap; line-height:1.2; cursor:pointer;" style-hover="background:#E9834A; border-color:#E9834A; color:#16233F;">{{ lookupLabel }}</button>
+          <p style="font-size:13.5px; line-height:1.7; color:#6E7B9B; margin:0;">Should the roll number be mislaid, the school coordinator holds the complete list.</p>
+        </div>
+      </div>
+
+      <div style="min-width:0; padding:36px; background:#F5EAE0;">
+        <sc-if value="{{ resultShown }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <div style="display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap; align-items:flex-start;">
+            <div>
+              <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">WT26-014892</div>
+              <div style="font-family:'Spectral',serif; font-weight:500; font-size:27px; margin-top:8px;">Aparna R. Menon</div>
+              <div style="font-size:14px; color:#46567C; margin-top:4px;">Class VIII · English medium</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-family:'Spectral',serif; font-weight:400; font-size:46px; line-height:1; color:#B85A22;">82</div>
+              <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B; margin-top:4px;">Out of 100</div>
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:12px; margin-top:28px;">
+            <div style="padding:16px; background:#FFFFFF; border:1px solid rgba(22,35,63,0.16);">
+              <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#B85A22;">State</div>
+              <div style="font-family:'Spectral',serif; font-weight:500; font-size:23px; margin-top:4px;">142</div>
+            </div>
+            <div style="padding:16px; background:#FFFFFF; border:1px solid rgba(22,35,63,0.16);">
+              <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#5C4BC4;">School</div>
+              <div style="font-family:'Spectral',serif; font-weight:500; font-size:23px; margin-top:4px;">03</div>
+            </div>
+            <div style="padding:16px; background:#FFFFFF; border:1px solid rgba(22,35,63,0.16);">
+              <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6E7B9B;">Percentile</div>
+              <div style="font-family:'Spectral',serif; font-weight:500; font-size:23px; margin-top:4px;">94.6</div>
+            </div>
+          </div>
+          <button type="button" onClick="{{ goReport }}" style="margin-top:26px; padding:13px 24px; border:1px solid rgba(22,35,63,0.3); border-radius:2px; background:transparent; color:#16233F; font-size:14px; font-weight:600; letter-spacing:0.03em; white-space:nowrap; line-height:1.2; cursor:pointer;" style-hover="background:#FFFFFF;">Open the Full Performance Report →</button>
+        </div>
+        </sc-if>
+        <sc-if value="{{ resultHidden }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; flex-direction:column; justify-content:center; height:100%; min-height:250px; align-items:flex-start; gap:14px;">
+          <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Awaiting entry</div>
+          <div style="font-family:'Spectral',serif; font-weight:400; font-size:26px; line-height:1.24;">The scorecard will appear here</div>
+          <p style="font-size:14.5px; line-height:1.7; color:#46567C; max-width:300px; margin:0;">Enter a roll number to preview the result card, or use the demonstration button to view a completed example.</p>
+        </div>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:28px; margin-top:40px; padding-top:32px; border-top:1px solid rgba(22,35,63,0.14);">
+      <div>
+        <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Reports delivered</div>
+        <div style="font-family:'Spectral',serif; font-weight:500; font-size:22px; margin-top:8px;">Through your school</div>
+      </div>
+      <div>
+        <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Rank lists</div>
+        <div style="font-family:'Spectral',serif; font-weight:500; font-size:22px; margin-top:8px;">State &amp; school level</div>
+      </div>
+      <div>
+        <div style="font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:#6E7B9B;">Every participant</div>
+        <div style="font-family:'Spectral',serif; font-weight:500; font-size:22px; margin-top:8px;">Certificate &amp; scorecard</div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- MOTTO STRIP -->
+  <div style="margin-top:96px; padding:18px 0; border-top:1px solid rgba(22,35,63,0.14); border-bottom:1px solid rgba(22,35,63,0.14); background:#F5EAE0; overflow:hidden;">
+    <div style="display:flex; width:max-content; animation:wt-marquee 42s linear infinite;">
+      <div style="display:flex; align-items:center; gap:40px; padding-right:40px; font-family:'Spectral',serif; font-weight:400; font-size:19px; letter-spacing:0.02em; color:#B85A22; white-space:nowrap;">
+        <span>Beyond marks, towards excellence</span><span style="color:#5C4BC4;">·</span>
+        <span>Every child has a strength</span><span style="color:#5C4BC4;">·</span>
+        <span>LKG to Class XII</span><span style="color:#5C4BC4;">·</span>
+        <span>English &amp; Malayalam medium</span><span style="color:#5C4BC4;">·</span>
+        <span>Beyond marks, towards excellence</span><span style="color:#5C4BC4;">·</span>
+        <span>Every child has a strength</span><span style="color:#5C4BC4;">·</span>
+        <span>LKG to Class XII</span><span style="color:#5C4BC4;">·</span>
+        <span>English &amp; Malayalam medium</span><span style="color:#5C4BC4;">·</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="background:#16233F; color:#D6CFC6;">
+    <div style="max-width:1280px; margin:0 auto; padding:64px 28px 34px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:44px;">
+        <div style="min-width:0;">
+          <div style="font-family:'Spectral',serif; font-weight:400; font-size:27px; color:#FFFFFF;">Win Test 2026</div>
+          <div style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#F0A86E; margin-top:10px;">Know your strength. Shape your future.</div>
+          <p style="font-size:14px; line-height:1.75; margin:20px 0 0; max-width:280px;">A national-level academic assessment and scholarship programme for students of LKG to Class XII.</p>
+        </div>
+        <div style="min-width:0; display:flex; flex-direction:column; gap:11px;">
+          <div style="font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:#8E9AB4; margin-bottom:4px;">Navigate</div>
+          <button type="button" onClick="{{ goAbout }}" style="padding:0; border:0; background:transparent; color:#D6CFC6; font-size:14.5px; text-align:left; cursor:pointer;" style-hover="color:#F0A86E;">About Us</button>
+          <button type="button" onClick="{{ goSyllabus }}" style="padding:0; border:0; background:transparent; color:#D6CFC6; font-size:14.5px; text-align:left; cursor:pointer;" style-hover="color:#F0A86E;">Academics</button>
+          <button type="button" onClick="{{ goReport }}" style="padding:0; border:0; background:transparent; color:#D6CFC6; font-size:14.5px; text-align:left; cursor:pointer;" style-hover="color:#F0A86E;">Performance Report</button>
+          <button type="button" onClick="{{ goResults }}" style="padding:0; border:0; background:transparent; color:#D6CFC6; font-size:14.5px; text-align:left; cursor:pointer;" style-hover="color:#F0A86E;">Results</button>
+          <button type="button" onClick="{{ goRegister }}" style="padding:0; border:0; background:transparent; color:#D6CFC6; font-size:14.5px; text-align:left; cursor:pointer;" style-hover="color:#F0A86E;">Registration</button>
+        </div>
+        <div style="min-width:0; display:flex; flex-direction:column; gap:11px;">
+          <div style="font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:#8E9AB4; margin-bottom:4px;">The Examination</div>
+          <div style="font-size:14.5px;">5 December 2026</div>
+          <div style="font-size:14.5px;">10 a.m. – 12 noon</div>
+          <div style="font-size:14.5px;">Respective schools</div>
+          <div style="font-size:14.5px;">Registration closes 10 November 2026</div>
+        </div>
+        <div style="min-width:0;">
+          <div style="font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:#8E9AB4; margin-bottom:15px;">Enquiries</div>
+          <div style="font-size:14.5px; line-height:1.9;">
+            Tel: <a href="tel:+919946186647" style="color:#F0A86E;">+91 99461 86647</a><br>
+            Email: <a href="mailto:wintestscholars@gmail.com" style="color:#F0A86E;">wintestscholars@gmail.com</a><br>
+            Website: <a href="https://www.wintest.org" style="color:#F0A86E;">www.wintest.org</a>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-top:52px; padding-top:22px; border-top:1px solid rgba(255,255,255,0.16); font-size:13px; color:#8E9AB4;">
+        <span>© 2026 Win Test. All rights reserved.</span>
+        <span>Registration fee ₹220 · Payable at the school</span>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;feeLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;₹220&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;ctaLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Submit Registration&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;showAwards&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+class Component extends DCLogic {
+  state = { page: "home", sent: false, result: false };
+
+  go(page) {
+    this.setState({ page: page }, () => window.scrollTo(0, 0));
+  }
+
+  scrollToForm() {
+    const el = document.getElementById("register");
+    if (el) window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 60);
+  }
+
+  renderVals() {
+    const p = this.state.page;
+    return {
+      isHome: p === "home",
+      isReport: p === "report",
+      isResults: p === "results",
+      isSyllabus: p === "syllabus",
+      isAbout: p === "about",
+      goHome: () => this.go("home"),
+      goReport: () => this.go("report"),
+      goResults: () => this.go("results"),
+      goSyllabus: () => this.go("syllabus"),
+      goAbout: () => this.go("about"),
+      goRegister: () => {
+        if (p !== "home") this.setState({ page: "home" }, () => this.scrollToForm());
+        else this.scrollToForm();
+      },
+      feeLabel: this.props.feeLabel ?? "₹220",
+      ctaLabel: this.state.sent ? "Registration received" : (this.props.ctaLabel ?? "Submit Registration"),
+      showAwards: this.props.showAwards ?? true,
+      submitNote: this.state.sent
+        ? "The school coordinator will confirm once the fee of ₹220 has been recorded."
+        : "A design mockup; no information is submitted.",
+      submit: () => this.setState({ sent: true }),
+      lookup: () => this.setState({ result: true }),
+      lookupLabel: this.state.result ? "Result loaded" : "View Result (demonstration)",
+      resultShown: this.state.result,
+      resultHidden: !this.state.result
+    };
+  }
+}
+</script>
+</body>
+</html>
